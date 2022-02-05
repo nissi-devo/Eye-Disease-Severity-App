@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Welcome {{ current_user.username }}</h1>
+    <br>
+    <br>
+    <br>
+    <div>
+        <form  id="myform" class="form-signin" method=post enctype=multipart/form-data>
+		<h2 class="h4 mb-3 font-weight-normal">Please Upload The Image</h2>
+		<input type="file" name="file" class="form-control-file" id="inputfile"  onchange="preview_image(event)">
+		<br />
+		    <img id="output-image" class="rounded mx-auto d-block"/>
+            <div class="d-flex mt-5 mb-5">
+            <label for="name">Severity rank</label><input id="input-rank" type="number" name="rank" class="float-left ml-3 d-block"/>
+            </div>
+                <button class="btn btn-lg btn-info btn-block" type="submit">Upload</button>
+		<p class="mt-5 mb-3 text-muted">Powered by TensorFlow, Flask, and Bootstrap.</p>
+		<div class="row">
+			<div class="col-sm-4 align-self-center"><img src="/static/pt.png" alt="" width="60"></div>
+			<div class="col-sm-4 align-self-center"><img src="/static/flask.png" alt="" width="90"></div>
+			<div class="col-sm-4 align-self-center"><img src="/static/bs.png" alt="" width="50"></div>
+		</div>
+	</form>
+    </div>
+
+<style type="text/css">
+    #btn {
+        display:none;
+    }
+</style>
+
+{% if show_modal %}
+<!-- Modal -->
+<button id="btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Modal
+</button>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Model Results</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p><strong>Severity Score:</strong> {{severity}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<script type="text/javascript">
+		function preview_image(event) {
+			var reader = new FileReader();
+			reader.onload = function(){
+				var output = document.getElementById('output-image')
+				output.src = reader.result;
+			}
+			reader.readAsDataURL(event.target.files[0]);
+		}
+    window.onload = function(){
+    document.getElementById('btn').click();
+  }
+	</script>
+
+{% endblock content %}

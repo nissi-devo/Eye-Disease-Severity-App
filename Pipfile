@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+flask-sqlalchemy = "*"
+pandas = "*"
+tensorflow = "*"
+flask-login = "*"
+flask-bcrypt = "*"
+flask-wtf = "*"
+wtforms = "*"
+email-validator = "*"
+werkzeug = "*"
+pillow = "*"
+numpy = "*"
+opencv-python = "*"
+torch = "*"
+torchvision = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
